@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="MBSRecyclerViewPager">
+        <attr name="mbs_rvvp_page_spacing" format="dimension" />
+        <attr name="mbs_rvvp_edge_shadow_type"/>
+    </declare-styleable>
+
+    <declare-styleable name="MBSRecyclerView">
+        <attr name="mbs_rv_divider_color" format="color" />
+        <attr name="mbs_rv_divider_width" format="dimension" />
+    </declare-styleable>
+</resources>

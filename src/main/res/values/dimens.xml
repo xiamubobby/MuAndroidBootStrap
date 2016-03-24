@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--<dimen name="mbs_rvp_page_spacing">5dp</dimen>-->
+    <dimen name="mbs_rvp_page_spacing">0dp</dimen>
+    <dimen name="mbs_rvp_default_shadow_width_dp">6dp</dimen>
+
+    <dimen name="mbs_rv_dafault_divider_dp">1dp</dimen>
+</resources>

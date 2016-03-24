@@ -1,4 +1,34 @@
+buildscript {
+    ext.kotlin_version = "1.0.0"
+    ext.anko_version = "0.8.2"
+    ext.retrofit_version = "2.0.0-beta4"
+    ext.rxjava_version = "1.1.1"
+    ext.rxbinding_version = "0.4.0"
+    ext.rxlifecycle_version = "0.5.0"
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:2.1.0-alpha1'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath "org.jetbrains.kotlin:kotlin-android-extensions:$kotlin_version"
+    }
+}
+
+allprojects {
+    repositories {
+        jcenter()
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
+
 apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+
 
 android {
     compileSdkVersion 23
@@ -9,6 +39,13 @@ android {
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
+        //multiDexEnabled true
+    }
+    dexOptions {
+        javaMaxHeapSize "4g"
+    }
+    sourceSets {
+        main.java.srcDirs += "./src/main/kotlin"
     }
     buildTypes {
         release {
@@ -18,8 +55,59 @@ android {
     }
 }
 
+repositories {
+    //maven { url "https://jitpack.io" }
+}
+
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:23.2.1'
+    /**
+     * android suppoprts
+     */
+    compile 'com.android.support:support-v4:23.2.0'
+    compile 'com.android.support:appcompat-v7:23.2.0'
+    compile 'com.android.support:appcompat-v7:23.2.0'
+    compile 'com.android.support:design:23.2.0'
+    compile 'com.android.support:cardview-v7:23.2.0'
+    compile 'com.android.support:percent:23.2.0'
+        //compile 'com.android.support:multidex:1.0.1'
+    /**
+     * kotlin relatives
+     */
+    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    /**
+     * anko relatives
+     */
+    compile "org.jetbrains.anko:anko-sdk23:$anko_version"
+    /**
+     * rxjava relatives
+     */
+    compile "io.reactivex:rxjava:$rxjava_version"
+    /**
+     * randroid relatives
+     */
+    compile "com.jakewharton.rxbinding:rxbinding:$rxbinding_version"
+    compile "com.jakewharton.rxbinding:rxbinding-support-v4:$rxbinding_version"
+    compile "com.jakewharton.rxbinding:rxbinding-appcompat-v7:$rxbinding_version"
+    compile "com.jakewharton.rxbinding:rxbinding-design:$rxbinding_version"
+    compile "com.jakewharton.rxbinding:rxbinding-recyclerview-v7:$rxbinding_version"
+    compile "com.jakewharton.rxbinding:rxbinding-kotlin:$rxbinding_version"
+    compile "com.jakewharton.rxbinding:rxbinding-support-v4-kotlin:$rxbinding_version"
+    compile "com.jakewharton.rxbinding:rxbinding-appcompat-v7-kotlin:$rxbinding_version"
+    compile "com.jakewharton.rxbinding:rxbinding-design-kotlin:$rxbinding_version"
+    compile "com.jakewharton.rxbinding:rxbinding-recyclerview-v7-kotlin:$rxbinding_version"
+    compile "com.trello:rxlifecycle:$rxlifecycle_version"
+    compile "com.trello:rxlifecycle-components:$rxlifecycle_version"
+    compile "com.trello:rxlifecycle-kotlin:$rxlifecycle_version"
+    /**
+     * retrofit relatives
+     */
+    compile "com.squareup.retrofit2:retrofit:$retrofit_version"
+    compile "com.squareup.retrofit2:adapter-rxjava:$retrofit_version"
+    compile "com.squareup.retrofit2:converter-gson:$retrofit_version"
+    /**
+     * 3rd-party widgets
+     */
+    //compile 'com.github.lsjwzh.RecyclerViewPager:lib:v1.1.0-beta5'
 }
