@@ -14,10 +14,3 @@ object theMBSLogger : MBSLogger(null) {
     override var context: MBSActivity? = null
     override var snackSpawnee: View? = null
 }
-
-val Any.logger: MBSLogger
-    get() = theMBSLogger
-
-fun Any.info(logText: String) { logger.info(logText) }
-fun Any.logInfo(logText: String) { logger.info(logText) }
-fun Any._info_(logText: String) { logger.info(logText) }

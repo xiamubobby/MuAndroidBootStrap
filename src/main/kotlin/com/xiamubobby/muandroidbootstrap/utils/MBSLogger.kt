@@ -61,6 +61,18 @@ abstract class MBSLogger: AnkoLogger {
     abstract var context: MBSActivity?
     abstract var snackSpawnee: View?
 
+    public fun resolveLoggerTag(logger: Any): String {
+        val tag = logger.javaClass.simpleName
+        return if (tag.length <= 23) {
+            tag
+        } else {
+            tag.substring(0, 23)
+        }
+    }
+
+    public fun info(loggee: Any?, tag: String = loggerTag) {
+        info(loggee.toString())
+    }
     public fun info(loggee: Any?) {
         info(loggee.toString())
     }
