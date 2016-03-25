@@ -71,14 +71,11 @@ abstract class MBSLogger: AnkoLogger {
     }
 
     public fun info(loggee: Any?, tag: String = loggerTag) {
-        info(loggee.toString())
+        info(loggee.toString(), tag)
     }
-    public fun info(loggee: Any?) {
-        info(loggee.toString())
-    }
-    public fun info(logText: String) {
+    public fun info(logText: String, tag: String) {
         if (logTargetFlag and LogTarget.LOGCAT.flag != 0) {
-            Log.i(loggerTag, logText)
+            Log.i(tag, logText)
         }
         if (logTargetFlag and LogTarget.FILE.flag != 0) {
 
