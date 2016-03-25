@@ -12,6 +12,10 @@ get() = theMBSLogger.resolveLoggerTag(this)
 val Any.logger: MBSLogger
 get() = theMBSLogger
 
-fun Any.info(loggee: Any) = logger.info(loggee, loggerTag)
-fun Any._info_(loggee: Any) = logger.info(loggee, loggerTag)
-fun Any.logInfo(loggee: Any) = logger.info(loggee, loggerTag)
+fun Any.info(loggee: Any?) = logger.info(loggee, loggerTag)
+fun Any._info_(loggee: Any?) = logger.info(loggee, loggerTag)
+fun Any.logInfo(loggee: Any?) = logger.info(loggee, loggerTag)
+
+fun Any.debug(loggee: Any?) = logger.debug(loggee, loggerTag)
+fun Any._debug_(loggee: Any?) = logger.debug(loggee, loggerTag)
+fun Any.logDebug(loggee: Any?) = logger.debug(loggee, loggerTag)

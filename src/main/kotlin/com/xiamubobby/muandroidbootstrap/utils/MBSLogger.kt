@@ -70,6 +70,24 @@ abstract class MBSLogger: AnkoLogger {
         }
     }
 
+    public fun debug(loggee: Any?, tag: String = loggerTag) {
+        info(loggee.toString(), tag)
+    }
+    public fun debug(logText: String, tag: String) {
+        if (logTargetFlag and LogTarget.LOGCAT.flag != 0) {
+            Log.d(tag, logText)
+        }
+        if (logTargetFlag and LogTarget.FILE.flag != 0) {
+
+        }
+        if (logTargetFlag and LogTarget.NOTIFICATION.flag != 0) {
+            log2Notification(logText)
+        }
+        if (logTargetFlag and LogTarget.SNACKBAR.flag !=0) {
+            snackSpawnee?.snack(logText)
+        }
+    }
+
     public fun info(loggee: Any?, tag: String = loggerTag) {
         info(loggee.toString(), tag)
     }
