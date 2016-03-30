@@ -4,6 +4,7 @@ import android.Manifest
 import android.support.v7.app.NotificationCompat
 import android.util.Log
 import android.view.View
+import android.view.accessibility.AccessibilityEvent
 import com.xiamubobby.kotlinextensions.androidextensions.checkPermission
 import com.xiamubobby.kotlinextensions.androidextensions.snack
 import com.xiamubobby.kotlinextensions.whenNotNull
@@ -88,6 +89,24 @@ abstract class MBSLogger: AnkoLogger {
         }
     }
 
+    public fun error(loggee: Any?, tag: String = loggerTag) {
+        error(loggee.toString(), tag)
+    }
+    public fun error(logText: String, tag: String) {
+        if (logTargetFlag and LogTarget.LOGCAT.flag != 0) {
+            Log.e(tag, logText)
+        }
+        if (logTargetFlag and LogTarget.FILE.flag != 0) {
+
+        }
+        if (logTargetFlag and LogTarget.NOTIFICATION.flag != 0) {
+            log2Notification(logText)
+        }
+        if (logTargetFlag and LogTarget.SNACKBAR.flag !=0) {
+            snackSpawnee?.snack(logText)
+        }
+    }
+
     public fun info(loggee: Any?, tag: String = loggerTag) {
         info(loggee.toString(), tag)
     }
@@ -104,6 +123,35 @@ abstract class MBSLogger: AnkoLogger {
         if (logTargetFlag and LogTarget.SNACKBAR.flag !=0) {
             snackSpawnee?.snack(logText)
         }
+    }
+
+    public fun intAccessibilityEventToString(id: Int): String {
+        var ret: String = "Unfound Event Id"
+        when(id) {
+            AccessibilityEvent.TYPE_VIEW_CLICKED -> { ret = "TYPE_VIEW_CLICKED "}
+            AccessibilityEvent.TYPE_VIEW_LONG_CLICKED -> { ret = "TYPE_VIEW_LONG_CLICKED "}
+            AccessibilityEvent.TYPE_VIEW_SELECTED -> { ret = "TYPE_VIEW_SELECTED "}
+            AccessibilityEvent.TYPE_VIEW_FOCUSED -> { ret = "TYPE_VIEW_FOCUSED "}
+            AccessibilityEvent.TYPE_VIEW_TEXT_CHANGED -> { ret = "TYPE_VIEW_TEXT_CHANGED "}
+            AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED -> { ret = "TYPE_WINDOW_STATE_CHANGED "}
+            AccessibilityEvent.TYPE_NOTIFICATION_STATE_CHANGED -> { ret = "TYPE_NOTIFICATION_STATE_CHANGED "}
+            AccessibilityEvent.TYPE_VIEW_HOVER_ENTER -> { ret = "TYPE_VIEW_HOVER_ENTER "}
+            AccessibilityEvent.TYPE_VIEW_HOVER_EXIT -> { ret = "TYPE_VIEW_HOVER_EXIT "}
+            AccessibilityEvent.TYPE_TOUCH_EXPLORATION_GESTURE_START -> { ret = "TYPE_TOUCH_EXPLORATION_GESTURE_START "}
+            AccessibilityEvent.TYPE_TOUCH_EXPLORATION_GESTURE_END -> { ret = "TYPE_TOUCH_EXPLORATION_GESTURE_END "}
+            AccessibilityEvent.TYPE_WINDOW_CONTENT_CHANGED -> { ret = "TYPEWINDOW_CONTENT_CHANGED" }
+            AccessibilityEvent.TYPE_VIEW_SCROLLED -> { ret = "TYPE_VIEW_SCROLLED"}
+            AccessibilityEvent.TYPE_VIEW_TEXT_SELECTION_CHANGED -> { ret = "TYPE_VIEW_TEXT_SELECTION_CHANGED" }
+            AccessibilityEvent.TYPE_ANNOUNCEMENT -> { ret = "TYPE_ANNOUNCEMENT" }
+            AccessibilityEvent.TYPE_VIEW_TEXT_TRAVERSED_AT_MOVEMENT_GRANULARITY -> { ret = "TYPE_VIEW_TEXT_TRAVERSED_AT_MOVEMENT_GRANULARITY" }
+            AccessibilityEvent.TYPE_GESTURE_DETECTION_START -> { ret = "TYPE_GESTURE_DETECTION_START" }
+            AccessibilityEvent.TYPE_GESTURE_DETECTION_END -> { ret = "TYPE_GESTURE_DETECTION_END" }
+            AccessibilityEvent.TYPE_TOUCH_INTERACTION_START -> { ret = "TYPE_TOUCH_INTERACTION_START" }
+            AccessibilityEvent.TYPE_TOUCH_INTERACTION_END -> { ret = "TYPE_TOUCH_INTERACTION_END" }
+            AccessibilityEvent.TYPE_WINDOWS_CHANGED -> { ret = "TYPE_WINDOWS_CHANGED" }
+            AccessibilityEvent.TYPE_VIEW_CONTEXT_CLICKED -> { ret = "TYPE_VIEW_CONTEXT_CLICKED" }
+        }
+        return ret
     }
 
     private var timeStamp = System.currentTimeMillis()

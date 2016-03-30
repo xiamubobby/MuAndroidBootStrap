@@ -19,3 +19,7 @@ fun Any.logInfo(loggee: Any?) = logger.info(loggee, loggerTag)
 fun Any.debug(loggee: Any?) = logger.debug(loggee, loggerTag)
 fun Any._debug_(loggee: Any?) = logger.debug(loggee, loggerTag)
 fun Any.logDebug(loggee: Any?) = logger.debug(loggee, loggerTag)
+
+fun Any.error(loggee: Any?) = logger.error(loggee, loggerTag)
+fun Any._error_(loggee: Any?) = logger.error(loggee, loggerTag)
+fun Any.logError(loggee: Any?) = logger.error(loggee, loggerTag)
